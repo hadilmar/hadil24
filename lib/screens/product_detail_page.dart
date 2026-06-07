@@ -19,10 +19,20 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   Map<String, bool> _selectedAddons = {};
 
   List<Addon> getAvailableAddons() {
-    if (widget.product.name.contains("ميلك كيك")) return [Addon(name: "صوص شوكولاتة", price: 5)];
-    if (widget.product.name.contains("مايتي كريب")) return [Addon(name: "صوص كراميل", price: 7), Addon(name: "آيس كريم", price: 10)];
-    if (widget.product.name.contains("كرواسان")) return [Addon(name: "جبن إضافي", price: 3)];
-    if (widget.product.name.contains("بانكيك")) return [Addon(name: "صوص شوكولاتة", price: 5), Addon(name: "بندق مجروش", price: 4)];
+    if (widget.product.name.contains("ميلك كيك"))
+      return [Addon(name: "صوص شوكولاتة", price: 5)];
+    if (widget.product.name.contains("مايتي كريب"))
+      return [
+        Addon(name: "صوص كراميل", price: 7),
+        Addon(name: "آيس كريم", price: 10),
+      ];
+    if (widget.product.name.contains("كرواسان"))
+      return [Addon(name: "جبن إضافي", price: 3)];
+    if (widget.product.name.contains("بانكيك"))
+      return [
+        Addon(name: "صوص شوكولاتة", price: 5),
+        Addon(name: "بندق مجروش", price: 4),
+      ];
     return [];
   }
 
@@ -64,7 +74,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           icon: const Icon(Icons.arrow_back, color: Colors.red),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(widget.product.name, style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+        title: Text(
+          widget.product.name,
+          style: const TextStyle(
+            color: Colors.red,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
         actions: [
           IconButton(
@@ -90,7 +106,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(image: AssetImage(widget.product.imagePath), fit: BoxFit.cover),
+                  image: DecorationImage(
+                    image: AssetImage(widget.product.imagePath),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -98,24 +117,52 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(widget.product.name, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                Text('${widget.product.price.toStringAsFixed(0)} LYD', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.red)),
+                Text(
+                  widget.product.name,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '${widget.product.price.toStringAsFixed(0)} LYD',
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 8),
-            Text(widget.product.weight, style: TextStyle(color: Colors.grey.shade600)),const SizedBox(height: 20),
-            const Text('Ingredients:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text(
+              widget.product.weight,
+              style: TextStyle(color: Colors.grey.shade600),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Ingredients:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
-            Text(widget.product.ingredients, style: TextStyle(fontSize: 14, color: Colors.grey.shade700)),
+            Text(
+              widget.product.ingredients,
+              style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
+            ),
             const SizedBox(height: 20),
             if (getAvailableAddons().isNotEmpty) ...[
-              const Text('Add-ons:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              const Text(
+                'Add-ons:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 8),
               ...getAvailableAddons().map((addon) {
                 return CheckboxListTile(
                   title: Text('${addon.name}  +${addon.price} LYD'),
                   value: _selectedAddons[addon.name],
-                  onChanged: (val) => setState(() => _selectedAddons[addon.name] = val ?? false),
+                  onChanged: (val) => setState(
+                    () => _selectedAddons[addon.name] = val ?? false,
+                  ),
                   activeColor: Colors.red,
                   contentPadding: EdgeInsets.zero,
                   controlAffinity: ListTileControlAffinity.leading,
@@ -125,11 +172,19 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             const SizedBox(height: 10),
             Row(
               children: [
-                const Text('Quantity:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const Text(
+                  'Quantity:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(width: 20),
                 IconButton(
-                  icon: const Icon(Icons.remove_circle_outline, color: Colors.red),
-                  onPressed: () => setState(() { if (_quantity > 1) _quantity--; }),
+                  icon: const Icon(
+                    Icons.remove_circle_outline,
+                    color: Colors.red,
+                  ),
+                  onPressed: () => setState(() {
+                    if (_quantity > 1) _quantity--;
+                  }),
                 ),
                 Text('$_quantity', style: const TextStyle(fontSize: 18)),
                 IconButton(
@@ -141,12 +196,25 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: Colors.red.shade50, borderRadius: BorderRadius.circular(12)),
+              decoration: BoxDecoration(
+                color: Colors.red.shade50,
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Total:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  Text('${totalPrice.toStringAsFixed(2)} LYD', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red)),
+                  const Text(
+                    'Total:',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    '${totalPrice.toStringAsFixed(2)} LYD',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -166,16 +234,25 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   );
                   await cart.addItem(newItem);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('${_quantity} x ${widget.product.name} added to cart')),
+                    SnackBar(
+                      content: Text(
+                        '${_quantity} x ${widget.product.name} added to cart',
+                      ),
+                    ),
                   );
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
                   padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                 ),
-                child: const Text('Add to Cart', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                child: const Text(
+                  'Add to Cart',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ],
